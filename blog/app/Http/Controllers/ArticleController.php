@@ -26,13 +26,15 @@ class ArticleController extends Controller
         $article->text = $request->text;
         $article->author_id = $request->author_id;
         $article -> save();
-        return $article;
+        return Article::where('id', $article->id)->with('author')->FirstOrFail();
     }
 
     public function update($id ,Request $request)
     {
-        $article  = Article::where('id', $id)->FirstOrFail();
-        $article->name = $request->name;
+        $article  = Article::where('id', $id)->with('author')->FirstOrFail();
+        $article->title = $request->title;
+        $article->text = $request->text;
+        $article->author_id = $request->author_id;
         $article->save();
         return $article;
     }

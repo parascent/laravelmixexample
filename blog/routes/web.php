@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,16 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::view('/authors', '/authors', ['user'=>Auth::id()])->name('authors');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/authorss', function(){
+    dd(Auth::id());
 });
